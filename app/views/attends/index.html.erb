@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Attends</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Activity</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attends.each do |attend| %>
+      <tr>
+        <td><%= attend.user_id %></td>
+        <td><%= attend.activity_id %></td>
+        <td><%= link_to 'Show', attend %></td>
+        <td><%= link_to 'Edit', edit_attend_path(attend) %></td>
+        <td><%= link_to 'Destroy', attend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Attend', new_attend_path %>

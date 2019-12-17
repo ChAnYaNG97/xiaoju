@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @attend.user_id %>
+</p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @attend.activity_id %>
+</p>
+
+<%= link_to 'Edit', edit_attend_path(@attend) %> |
+<%= link_to 'Back', attends_path %>

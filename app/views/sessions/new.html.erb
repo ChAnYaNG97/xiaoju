@@ -1,0 +1,126 @@
+ <style>
+
+ #login-card{
+     margin-left:auto;
+     margin-right:auto;
+ };
+
+ </style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <%= image_tag("shards-logo.svg", :alt => "Example Navbar 1", :class => "mr-2", :height => "30")%>
+    <a class="navbar-brand" href="#">小聚</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-1" aria-controls="navbarNavDropdown-1"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown-1">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+        <a class="nav-link" href="#">Home
+            <span class="sr-only">(current)</span>
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="https://designrevision.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Services
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Design</a>
+            <a class="dropdown-item" href="#">Development</a>
+            <a class="dropdown-item" href="#">Marketing</a>
+        </div>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fa fa-twitter"></i>
+        </a>
+        </li>
+
+        <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fa fa-facebook"></i>
+        </a>
+        </li>
+
+        <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fa fa-linkedin"></i>
+        </a>
+        </li>
+
+        <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fa fa-github"></i>
+        </a>
+        </li>
+    </ul>
+    </div>
+</nav>
+<div class="card" id="login-card" style="width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">登录</h4>
+    <p>还没有小聚账号？立即注册</p>
+    <div class="row mb-2">
+            <div class="col-12">
+              <%= form_tag do %>
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <div class="input-group input-group-seamless">
+                      <span class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-user"></i>
+                        </span>
+                      </span>
+                      <%= text_field_tag :email, params[:email], :class => "form-control", :id => "form1-username", :placeholder => "电子邮箱"%>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <div class="input-group input-group-seamless">
+                      <span class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-user"></i>
+                        </span>
+                      </span>
+                      <%= text_field_tag :password, params[:password], :class => "form-control", :id => "form1-username", :placeholder => "密码"%>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                     <%= submit_tag("登录", :class=>"btn btn-primary", :name=>"submit") %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+  </div>
+</div>
+
+<%= form_tag do %>
+    <fieldset>
+        <legend>Please Log In</legend>
+        <div>
+            <%= label_tag :email, 'Email:' %>
+            <%= text_field_tag :email, params[:email] %>
+        </div>
+        <div>
+            <%= label_tag :password, 'Password:' %>
+            <%= password_field_tag :password, params[:password] %>
+        </div>
+        <div>
+            <%= submit_tag "Login" %>
+        </div>
+    </fieldset> 
+<% end %>
