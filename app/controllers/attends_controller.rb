@@ -26,6 +26,8 @@ class AttendsController < ApplicationController
   def create
     @user = current_user
     activity = Activity.find(params.require(:activity_id))
+    puts @user
+    puts activity
     @attend = @user.attends.build(activity: activity)
     
     respond_to do |format|

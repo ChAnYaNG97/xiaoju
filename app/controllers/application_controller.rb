@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
     private
         def current_user
-            User.find_by_id(session[:user_id])
+            User.find_by_id(session[:current_user_id])
         rescue ActiveRecord::RecordNotFound
             redirect_to login_url, notice: 'Please Login'
         end

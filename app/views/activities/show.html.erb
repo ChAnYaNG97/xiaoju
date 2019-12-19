@@ -49,7 +49,7 @@
         <h4 ><%= @activity.name %></h4>
       </div>
     </div>
-    <a class="btn btn-primary btn-pill align-self-center" style="color:white;">我要参加</a>
+    <%= button_to('我要参加', attends_path(activity_id: @activity), :class => "btn btn-primary btn-pill align-self-center", :style => "color:white;")%>
   </div>
 </nav>
 
@@ -86,8 +86,10 @@
         <img src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg" class="img-fluid" alt="Responsive image">
         <h3 style="margin-top:50px;">活动详情</h3>
         <%= @activity.detail %>
-
         <h3>参与人</h3>
+        <% @activity.attends.all.each do |attend|%>
+          <%= attend.user_id %>
+        <% end %>
         
         <div class="col-md-12">
           <div class="row">

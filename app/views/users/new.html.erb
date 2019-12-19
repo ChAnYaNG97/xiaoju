@@ -3,3 +3,97 @@
 <%= render 'form', user: @user %>
 
 <%= link_to 'Back', users_path %>
+
+
+
+
+<div class="container">
+  <div class="row text-center">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <div class="card">
+      <h4>注册</h4>
+        <div class="row mb-2">
+            <div class="col-12">
+              <%= form_tag do %>
+                <div class="row">
+                  <div class="form-group col-md-2"></div>
+                  <div class="form-group col-md-8">
+                    <div class="input-group input-group-seamless">
+                      <span class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-user" style="color:#abb6bf;"></i>
+                        </span>
+                      </span>
+                      <%= text_field_tag :email, params[:email], :class => "form-control", :id => "form1-username", :placeholder => "电子邮箱"%>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-2"></div>
+                  <div class="form-group col-md-8">
+                    <div class="input-group input-group-seamless">
+                      <span class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-user" style="color:#abb6bf;"></i>
+                        </span>
+                      </span>
+                      <%= text_field_tag :name, params[:name], :class => "form-control", :id => "form1-username", :placeholder => "用户名"%>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-md-2"></div>
+                  <div class="form-group col-md-8">
+                    <div class="input-group input-group-seamless">
+                      <span class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-user" style="color:#abb6bf;"></i>
+                        </span>
+                      </span>
+                      <%= text_field_tag :password, params[:password], :class => "form-control", :id => "form1-username", :placeholder => "密码"%>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-md-2"></div>
+                  <div class="form-group col-md-8">
+                    <div class="input-group input-group-seamless">
+                      <span class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-user" style="color:#abb6bf;"></i>
+                        </span>
+                      </span>
+                      <%= text_field_tag :password_confirmation, params[:password_confirmation], :class => "form-control", :id => "form1-username", :placeholder => "确认密码"%>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                     <%= submit_tag("注册", :class=>"btn btn-primary", :name=>"submit") %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+      
+      </div>
+      <h1>Froala Design Blocks</h1>
+      <p class="h2"><em>Right at the coast of the Semantics, a large language ocean.</em></p>
+    </div>
+  </div>
+
+  <div class="row text-center pt-3 pt-xl-5">
+    <div class="col-12 col-sm-10 m-auto m-md-0 col-md-6">
+      <img alt="image" height="300" src="./imgs/draws/tenis.svg">
+      <p class="lead pt-3">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+    </div>
+
+    <div class="col-12 col-sm-10 m-auto m-md-0 col-md-6 pt-5 pt-md-0">
+      <img alt="image" height="300" src="./imgs/draws/basketball.svg">
+      <p class="lead pt-3">Right at the coast of the Semantics, a large language ocean. A small river named Duden.</p>
+    </div>
+  </div>
+</div>
