@@ -6,6 +6,8 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  config.hosts = /gjcbsh-8080-[a-z0-9]+.access.myide.io/
+
   # Do not eager load code on boot.
   config.eager_load = false
 
