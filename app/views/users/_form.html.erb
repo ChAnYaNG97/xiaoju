@@ -38,8 +38,10 @@
 
   <div class="field">
     <%= form.label :photo_url %>
-    <%= form.text_field :photo_url %>
+    <%= form.file_field :photo, id: "form-file"%>
+    <%= form.text_field :photo_url, id: "form-file-url"%>
   </div>
+ 
 
   <div class="field">
     <%= form.label :birthday %>
@@ -52,6 +54,11 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Create", id: "sub12", class:"btn btn-primary"%>
+    
   </div>
+  
 <% end %>
+ <button id="submit-button">上传图片</button>
+
+<button id="sub">aaa</button>

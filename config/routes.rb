@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :acitivity_tags
+  resources :tags
+  resources :comments
   controller :sessions do
     get 'login' => :new
     post 'login' => :create

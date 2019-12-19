@@ -1,11 +1,9 @@
+
 <h1>New User</h1>
 
 <%= render 'form', user: @user %>
 
 <%= link_to 'Back', users_path %>
-
-
-
 
 <div class="container">
   <div class="row text-center">
@@ -66,7 +64,7 @@
                           <i class="fa fa-user" style="color:#abb6bf;"></i>
                         </span>
                       </span>
-                      <%= text_field_tag :password_confirmation, params[:password_confirmation], :class => "form-control", :id => "form1-username", :placeholder => "确认密码"%>
+                      <%= text_field_tag :password_confirmation, params[:password_confirmation], :class => "form-control", :id => "form-file", :placeholder => "确认密码"%>
                     </div>
                   </div>
                 </div>
@@ -97,3 +95,41 @@
     </div>
   </div>
 </div>
+
+
+<script>
+
+
+$('#submit-button').click(function(){
+      console.log('aaaa')
+      var files = $('#form-file').prop('files');
+      var data = new FormData();
+      console.log(files);
+      data.append('smfile', files[0]);
+      $('#sub12').addClass('disabled');
+      $.ajax({
+        url : '	https://sm.ms/api/upload',
+        type : 'POST',
+        data : data,
+        cache : false,
+        processData : false,
+        contentType : false,
+        async: false,//异步
+        success: function(json) {
+            console.log();
+            $('#sub12').removeClass('disabled');
+            json = JSON.parse(json);
+            console.log(json);
+            if(json.image !== null) {
+                console.log(json.images);
+                $('#form-file-url').val(json.images);
+            }
+            else if (json.success === true) {
+            
+                console.log(json.data.url);
+                $('#form-file-url').val(json.data.url);
+            }
+        }
+      });
+    });
+</script>

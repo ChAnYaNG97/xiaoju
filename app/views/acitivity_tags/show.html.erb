@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Acitivity:</strong>
+  <%= @acitivity_tag.acitivity_id %>
+</p>
+
+<p>
+  <strong>Tag:</strong>
+  <%= @acitivity_tag.tag_id %>
+</p>
+
+<%= link_to 'Edit', edit_acitivity_tag_path(@acitivity_tag) %> |
+<%= link_to 'Back', acitivity_tags_path %>
