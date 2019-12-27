@@ -1,41 +1,53 @@
-<p id="notice"><%= notice %></p>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary mb-4">
+  <%= image_tag("shards-logo.svg", :alt => "Example Navbar 1", :class => "mr-2", :height => "30")%>
+  <a class="navbar-brand" href="#">小聚</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-1"
+    aria-controls="navbarNavDropdown-1" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown-1">
+    <ul class="navbar-nav mr-auto">
+    </ul>
 
-<h1>Activities</h1>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link " href="/login">
+          登录
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/signup">
+          注册
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Detail</th>
-      <th>Start time</th>
-      <th>Location</th>
-      <th>Pic url</th>
-      <th>Max number</th>
-      <th>Host</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<!-- Cards -->
+<div id="cards" class="container mb-2" style="padding-bottom: 1px;margin-top: 100px;">
+  <div class="section-title col-lg-12 col-md-12 ml-auto mr-auto">
+    <h3 class="mb-4">所有活动</h3>
+  </div>
 
-  <tbody>
-    <% @activities.each do |activity| %>
-      <tr>
-        <td><%= activity.name %></td>
-        <td><%= activity.description %></td>
-        <td><%= activity.detail %></td>
-        <td><%= activity.start_time %></td>
-        <td><%= activity.location %></td>
-        <td><%= activity.pic_url %></td>
-        <td><%= activity.max_number %></td>
-        <td><%= activity.host %></td>
-        <td><%= link_to 'Show', activity %></td>
-        <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
-        <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Activity', new_activity_path %>
+  <div class="example col-md-12 ml-auto mr-auto">
+    <div class="row">
+      <% @activities.where('start_time > ?', DateTime.now).each do |activity| %>
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="card">
+            <%= image_tag(activity.pic_url, :class => "card-img", :style => "height:200px; object-fit: cover;")%>
+            <div class="card-img-overlay">
+              <h4 class="card-title"><%= activity.name %></h4>
+              <div style="vertical-align:bottom;">
+                <p class="card-text" style="color: white;"><%= activity.description %></p>
+                <%= link_to '了解详情', activity, :class => "btn btn-primary btn-pill align-self-center"%>
+                <p style="color: white;text-align: center;height: 38px;display: block;line-height: 38px" class="float-right">
+                  <%=((activity.start_time - DateTime.now) / 1.day).ceil %> 天后</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>

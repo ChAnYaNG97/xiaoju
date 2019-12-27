@@ -24,11 +24,14 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
-
+    user = current_user
+    activity = Activity.find(params.require(:activity_id))
+    content = params.require(:content)
+    @comment = user.comments.build(activity: activity, content: content)
+    puts @comment.user_id
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to activity, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }

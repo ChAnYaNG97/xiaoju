@@ -60,7 +60,7 @@
     <div class="col-lg-8">
       <div class="card">
         <div class="card-header">
-          <h5>要参加的活动</h5>
+          <h5>TA即将参加的活动</h5>
         </div>
         <div class="list-group card-list-group">
           <div class="list-group-item py-5">
@@ -84,7 +84,7 @@
 
       <div class="card">
         <div class="card-header">
-          <h5>已经参加的活动</h5>
+          <h5>TA参加过的活动</h5>
         </div>
 
         <% @user.attends.all.each do |attend|%> <% activity =
@@ -95,12 +95,12 @@
               <div class="media-body">
                 <div class="media-heading">
                   <small class="float-right text-muted">12 min</small>
-                  <h5><%= activity.name %></h5>
+                  <h5><%= link_to activity.name, activity %></h5>
                 </div>
                 <div class="text-muted text-small">
-                  <%= activity.detail %>
+                  <%= activity.description %>
                 </div>
-                <a href="#" class="btn btn-primary">了解详情</a>
+                
               </div>
             </div>
           </div>
@@ -206,3 +206,47 @@
 </p>
 <%= render 'form', user: @user %>
 <%= link_to 'Edit', edit_user_path(@user) %> | <%= link_to 'Back', users_path %>
+
+
+
+<script>
+
+
+  $('#submit-button').click(function () {
+    var files = $('#form-file').prop('files');
+    var data = new FormData();
+    console.log(files);
+    data.append('smfile', files[0]);
+    $('#sub12').addClass('disabled');
+    $.ajax({
+      url: 'https://sm.ms/api/upload',
+      type: 'POST',
+      data: data,
+      cache: false,
+      processData: false,
+      contentType: false,
+      async: false,//异步
+      success: function (json) {
+
+        console.log();
+        $('#sub12').removeClass('disabled');
+        json = JSON.parse(json);
+        console.log(json);
+        if(json.success === true) {
+
+          console.log(json.data.url);
+          $('#form-file-url').val(json.data.url);
+          $(".img").attr("src", json.data.url);
+        }
+        else if (json.image !== null) {
+          console.log(json.images);
+          $('#form-file-url').val(json.images);
+          $(".img").attr("src", json.images);
+        }
+        
+
+
+      }
+    });
+  });
+</script>

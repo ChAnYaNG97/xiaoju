@@ -40,15 +40,10 @@
   </div>
 </nav>
 
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @activity.name %>
-</p>
 
 <div class="card">
-  <div class="card-body">
+  <div class="card-body" style="margin-top:50px;">
     <div class="container mb-5">
       <h4><%= @activity.start_time.strftime("%A, %B %d, %Y")%></h4>
       <h1><%= @activity.name %></h1>
@@ -68,127 +63,63 @@
   <div class="row">
     <div class="col-8">
       <div class="col-11">
-        <img
-          src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg"
-          class="img-fluid"
-          alt="Responsive image"
-        />
+        <%= image_tag(@activity.pic_url, :class => "img-fluid")%>
         <h3 style="margin-top:50px;">活动详情</h3>
-        <%= @activity.detail %>
+        <p><%= @activity.detail %></p>
         <h3>参与人</h3>
-        <% @activity.attends.all.each do |attend|%> <%= attend.user_id %> <% end
-        %>
-
         <div class="col-md-12">
           <div class="row">
+
+            <% @activity.attends.all.each do |attend|%>
+            <% user = User.find(attend.user_id) %>
             <div class="col-md-3">
               <div class="card">
                 <div class="card-body" style="text-align:center;">
-                  <%= image_tag("mayi.jpg", :height => "56", :style =>
+                  <%= image_tag(user.photo_url, :height => "56", :style =>
                   "border-radius: 56px;")%>
                   <div class="card-name" style="margin-top:20px;">
-                    <%= @activity.name %>
+                    <%= user.nickname %>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="col-md-3">
-              <div class="card">
-                <div class="card-body" style="text-align:center;">
-                  <%=
-                  image_tag("https://i.loli.net/2019/12/19/qxXUNQk8ipJyCBc.jpg",
-                  :height => "56", :width => "56", :style => "border-radius:
-                  56px;")%>
-                  <div class="card-name" style="margin-top:20px;">
-                    <%= @activity.name %>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="card">
-                <div class="card-body" style="text-align:center;">
-                  <%= image_tag("mayi.jpg", :height => "56", :style =>
-                  "border-radius: 56px;")%>
-                  <div class="card-name" style="margin-top:20px;">
-                    <%= @activity.name %>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="card">
-                <div class="card-body" style="text-align:center;">
-                  <%= image_tag("mayi.jpg", :height => "56", :style =>
-                  "border-radius: 56px;")%>
-                  <div class="card-name" style="margin-top:20px;">
-                    <%= @activity.name %>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <h3 style="margin-top:50px;">评论</h3>
-
-            <ul class="list-unstyled">
-              <li class="media">
-                <img src="..." class="mr-3" alt="..." />
-                <div class="media-body">
-                  <h5 class="mt-0 mb-1">List-based media object</h5>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                  scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                  vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                  nisi vulputate fringilla. Donec lacinia congue felis in
-                  faucibus.
-                </div>
-              </li>
-              <li class="media my-4">
-                <img src="..." class="mr-3" alt="..." />
-                <div class="media-body">
-                  <h5 class="mt-0 mb-1">List-based media object</h5>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                  scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                  vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                  nisi vulputate fringilla. Donec lacinia congue felis in
-                  faucibus.
-                </div>
-              </li>
-              <li class="media">
-                <img src="..." class="mr-3" alt="..." />
-                <div class="media-body">
-                  <h5 class="mt-0 mb-1">List-based media object</h5>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                  scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                  vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                  nisi vulputate fringilla. Donec lacinia congue felis in
-                  faucibus.
-                </div>
-              </li>
-            </ul>
-
-            <div class="media">
-              <img src="..." class="align-self-start mr-3" alt="..." />
-              <div class="media-body">
-                <h5 class="mt-0">Top-aligned media</h5>
-                <p>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                  scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                  vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                  nisi vulputate fringilla. Donec lacinia congue felis in
-                  faucibus.
-                </p>
-                <p>
-                  Donec sed odio dui. Nullam quis risus eget urna mollis ornare
-                  vel eu leo. Cum sociis natoque penatibus et magnis dis
-                  parturient montes, nascetur ridiculus mus.
-                </p>
-              </div>
-            </div>
+            <% end%>
           </div>
         </div>
+            
+        <h3 style="margin-top:50px;">评论</h3>
+           
+            
+            <ul class="list-unstyled">
+              <% @activity.comments.order('created_at').each do |comment|%>
+              
+              <li class="media">
+                <%= image_tag(comment.user.photo_url, :class => "align-self-center", :height => "56", :style =>
+                "border-radius: 56px;")%>
+                <div class="media-body col-md-12">
+                  <h5 class="mt-0 mb-1"><%= comment.user.name%></h5>
+                  <p><%= comment.content%></p>
+                </div>
+              </li>
+              <% end %>
+
+              <hr></hr>
+              <%= form_tag(comments_path(activity_id: @activity), method: "post") do %>
+              <li class="media">
+                <%= image_tag(@user.photo_url, :height => "56", :style => "border-radius: 56px;")%>
+                <div class="media-body col-md-12" style="text-align: center;">
+                  <div class="input-group mb-3">
+                    
+                    <%= text_field_tag :content, "", class: "form-control", placeholder:"评论内容"%>
+                    <div class="input-group-append">   
+                      <%= submit_tag("评论", class:"btn btn-primary", style: "color:white;") %>
+                    </div>
+                  </div>
+                </div>
+
+                <% end %>
+              </li>
+            </ul>
       </div>
     </div>
     <div class="col-4">
@@ -213,9 +144,17 @@
             </div>
 
             <div class="media" style="margin-top:20px;">
-              <i class="far fa-map fa-fw fa-2x" style="color:white"></i>
+              <i class="fas fa-phone fa-fw fa-2x " style="color: gray;"></i>
               <div class="media-body" style="margin-left:10px;">
-                联系我们 1517240058
+              <%= User.find(@activity.host).tel %>
+              </div>
+            </div>
+
+
+            <div class="media" style="margin-top:20px;">
+              <i class="far fa-envelope fa-fw fa-2x" style="color: gray;"></i>
+              <div class="media-body" style="margin-left:10px;">
+                <%= User.find(@activity.host).email %>
               </div>
             </div>
           </div>

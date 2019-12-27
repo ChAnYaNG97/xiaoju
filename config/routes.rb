@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'meetup/index'
   controller :users do
     get 'signup' => :new
+    post 'signup' => :create
   end
   resources :attends
   resources :users

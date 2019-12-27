@@ -27,6 +27,9 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    puts params[:user][:birthday]
+    @user.birthday = Date.strptime(params[:user][:birthday], "%m/%d/%Y")
+    
     puts params[:user][:photo_url]
     respond_to do |format|
       if @user.save

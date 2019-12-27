@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
     protect_from_forgery
     before_action :authorize_user
 
+
     private
         def current_user
             User.find_by_id(session[:current_user_id])
