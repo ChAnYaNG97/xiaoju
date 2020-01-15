@@ -17,6 +17,10 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new
   end
 
+  def check
+    @activity = Activity.new
+  end
+
   # GET /activities/1/edit
   def edit
   end
