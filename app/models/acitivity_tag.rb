@@ -1,0 +1,2 @@
+class AcitivityTag < ApplicationRecord
+end

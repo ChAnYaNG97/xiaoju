@@ -1,3 +1,6 @@
+<div class="loader">
+    <div class="page-loader"></div>
+  </div>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary mb-4">
     <%= image_tag("shards-logo.svg", :alt => "Example Navbar 1", :class => "mr-2", :height => "30")%>
     <a class="navbar-brand" href="#">小聚</a>
@@ -7,32 +10,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown-1">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-            <span class="sr-only">(current)</span>
-        </a>
-        </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="https://designrevision.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Services
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Design</a>
-            <a class="dropdown-item" href="#">Development</a>
-            <a class="dropdown-item" href="#">Marketing</a>
-        </div>
-        </li>
     </ul>
 
     <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link " href="#">
+          <a class="nav-link " href="/login">
             登录
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/signup">
             注册
           </a>
         </li>
@@ -48,7 +35,7 @@
       <h1 class="slide-in">小聚</h1>
       <p class="slide-in">去遇见，去尝试，去热爱</p>
       <div class="action-links slide-in">
-        <a href="https://designrevision.com/downloads/shards" class="btn btn-primary btn-pill align-self-center">
+        <a href="/activities" class="btn btn-primary btn-pill align-self-center">
           开始体验</a>
       </div>
     </div>
@@ -57,44 +44,29 @@
   <!-- Cards -->
       <div id="cards" class="container mb-2" style="padding-bottom: 1px">
         <div class="section-title col-lg-8 col-md-12 ml-auto mr-auto">
-          <h3 class="mb-4">最新活动</h3>
-          <p> 看看最近有什么好玩的活动吧</p>
+          
+          <h3 class="mb-4 text-center">最新活动</h3>
+          <p class="text-center"> 看看最近有什么好玩的活动吧</p>
         </div>
 
         <div class="example col-md-12 ml-auto mr-auto">
           <div class="row">
+            <% Activity.order('start_time DESC').take(3).each do |activity|%>
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-              <div class="card" style="height:500px;">
-                <img class="card-img-top" src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <h4 class="card-title">怀柔滑雪⛷</h4>
-                  <p class="card-text">一起去怀柔滑雪场滑雪吧，限制10人，报名从速</p>
-                  <a href="#" class="btn btn-primary">了解详情</a>
+              <div class="card">
+                <%= image_tag(activity.pic_url, :class => "card-img", :style => "height:200px; object-fit: cover;")%>
+                <div class="card-img-overlay">
+                  <h4 class="card-title"><%= activity.name %></h4>
+                  <p class="card-text" style="color: white;"><%= activity.description %></p>
+                  <div style="vertical-align: middle;">
+                    
+                    <%= link_to '了解详情', activity, :class => "btn btn-primary btn-pill align-self-center"%>
+                    <p style="color: white;text-align: center;height: 38px;display: block;line-height: 38px" class="float-right"><%=((activity.start_time - DateTime.now) / 1.day).ceil %> 天后</p>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 sm-hidden">
-              <div class="card" style="height:500px;">
-                <img class="card-img-top" src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <h4 class="card-title">云计算讲座</h4>
-                  <p class="card-text">某某老师的云计算讲座</p>
-                  <a href="#" class="btn btn-primary">了解详情</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 sm-hidden">
-              <div class="card" style="height:500px;">
-                <img class="card-img-top" src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <h4 class="card-title">万达看《利刃出鞘》</h4>
-                  <p class="card-text">一起到万达看《利刃出鞘》</p>
-                  <a href="#" class="btn btn-primary">了解详情</a>
-                </div>
-              </div>
-            </div>
+            <% end %>
           </div>
         </div>
       </div>

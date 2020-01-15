@@ -1,8 +1,8 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
-
   # GET /activities
   # GET /activities.json
+
   def index
     @activities = Activity.all
   end
@@ -10,6 +10,7 @@ class ActivitiesController < ApplicationController
   # GET /activities/1
   # GET /activities/1.json
   def show
+    @current_user = current_user
   end
 
   # GET /activities/new
@@ -31,8 +32,11 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
     ## 一定是当前用户发起的活动
     @activity.host = current_user.id
+    @activity.tag = Tag.find_by_id(activity_params[:tag]).id
+    puts current_user.id, @activity.id
     respond_to do |format|
       if @activity.save
+        Attend.create(user_id: current_user.id, activity_id: @activity.id).save
         format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
         format.json { render :show, status: :created, location: @activity }
       else
@@ -70,10 +74,13 @@ class ActivitiesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_activity
       @activity = Activity.find(params[:id])
+      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      params.require(:activity).permit(:name, :description, :detail, :start_time, :location, :pic_url, :max_number)
+      params[:activity][:tag] = params[:activity][:tag].to_i
+      params.require(:activity).permit(:name, :description, :detail, :start_time, :location, :pic_url, :max_number, :host, :tag)
+      
     end
 end
