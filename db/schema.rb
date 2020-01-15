@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_28_121649) do
+ActiveRecord::Schema.define(version: 2020_01_15_150814) do
 
   create_table "acitivity_tags", force: :cascade do |t|
     t.integer "acitivity_id"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 2019_12_28_121649) do
     t.datetime "start_time"
     t.string "location"
     t.string "pic_url"
-    t.integer "max_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "host"
