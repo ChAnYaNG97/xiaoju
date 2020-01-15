@@ -100,10 +100,4 @@
           </div>
         </div>
       </div>
-<%@activities.each do |activity|%>
-    <h3><%= activity.name %></h3>
-    <%= button_to 'Join', attends_path(activity_id: activity) %>
-<% end %>
-
-
 <%= button_to 'Logout', logout_path, method: :delete %>

@@ -172,48 +172,6 @@
     </div>
   </div>
 </div>
-
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
-</p>
-
-<p>
-  <strong>Nickname:</strong>
-  <%= @user.nickname %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Photo url:</strong>
-  <%= @user.photo_url %>
-</p>
-
-<p>
-  <strong>Birthday:</strong>
-  <%= @user.birthday %>
-</p>
-
-<p>
-  <strong>Tel:</strong>
-  <%= @user.tel %>
-</p>
-<%= render 'form', user: @user %>
-<%= link_to 'Edit', edit_user_path(@user) %> | <%= link_to 'Back', users_path %>
-
-
-
 <script>
 
 
