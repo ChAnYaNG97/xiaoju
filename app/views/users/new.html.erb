@@ -163,20 +163,21 @@
                     <div class="input-group input-group-seamless">
                 
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input">
+                        <input type="file" class="custom-file-input" id="form-file">
                         <label class="custom-file-label">选择头像文件</label>
                         
                       </div>
                       <button id="submit-button22" class="btn btn-primary" type="button">上传头像</button>
                       
 
-                      <div>
-                        <img src="" class="img" style="width: 100px;">
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
 
+                <div>
+                  <img src="" class="img" style="width: 100px;">
+                </div>
 
                 <div class="row">
                   <div class="form-group col-md-2"></div>
@@ -188,7 +189,7 @@
                         </span>
                       </span>
                       
-                      <%=form.text_field :photo_url, disabled: "disabled", class: "form-control", id: "form-file-url"%>
+                      <%=form.text_field :photo_url, readonly:"readonly", class: "form-control", id: "form-file-url"%>
                       
                     </div>
                   </div>
@@ -216,42 +217,31 @@
 
 
 <script>
-
-
-$('#submit-button22').click(function(){
-      var files = $('#form-file').prop('files');
-      var data = new FormData();
-      console.log(files);
-      data.append('smfile', files[0]);
-      $('#sub12').addClass('disabled');
-      $.ajax({
-        url : 'https://sm.ms/api/upload',
-        type : 'POST',
-        data : data,
-        cache : false,
-        processData : false,
-        contentType : false,
-        async: false,//异步
-        success: function(json) {
-            
-            console.log();
+$('#submit-button22').click(function () {
+    var files = $('#form-file').prop('files');
+    var data = new FormData();
+    console.log(files);
+    data.append('image', files[0]);
+    data.append('key', 'aa6181d108ad788652bcd76729193a18');
+    $('#sub12').addClass('disabled');
+    $.ajax({
+        url: 'https://api.imgbb.com/1/upload',
+        type: 'POST',
+        data: data,
+        cache: false,
+        processData: false,
+        contentType: false,
+        async: true,//异步
+        success: function (json) {
             $('#sub12').removeClass('disabled');
-            json = JSON.parse(json);
             console.log(json);
-            if(json.image !== null) {
-                console.log(json.images);
-                $('#form-file-url').val(json.images);
-                $(".img").attr("src", json.images);
-            }
-            else if (json.success === true) {
             
+            if (json.success === true) {
                 console.log(json.data.url);
                 $('#form-file-url').val(json.data.url);
                 $(".img").attr("src", json.data.url);
             }
-
-            
         }
-      });
     });
+});
 </script>

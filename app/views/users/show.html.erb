@@ -30,7 +30,7 @@
     <div class="col-lg-4">
       <div class="card card-profile">
         <div class="card-body text-center">
-          <%= image_tag("mayi.jpg", :height => "100", :style => "border-radius:
+          <%= image_tag(@user.photo_url, :height => "100", :width => "100", :style => "border-radius:
           100px;")%>
           <h3 class="mb-3" style="margin-top:20px;"><%= @user.name %></h3>
         </div>
@@ -62,24 +62,27 @@
         <div class="card-header">
           <h5>TA即将参加的活动</h5>
         </div>
+        <% @user.attends.all.each do |attend|%>
+        <% Activity.where('id = ? and start_time > ?', attend.activity_id, DateTime.now).each do |activity| %>
+        
         <div class="list-group card-list-group">
           <div class="list-group-item py-5">
             <div class="media">
               <div class="media-body">
                 <div class="media-heading">
-                  <small class="float-right text-muted">12 min</small>
-                  <h5>John Doe</h5>
+                  <small class="float-right text-muted"><%=((activity.start_time - DateTime.now) / 1.day).ceil %> 天后</small>
+                  <h5><%= link_to activity.name, activity %></h5>
                 </div>
                 <div class="text-muted text-small">
-                  Samsa was a travelling salesman - and above it there hung a
-                  picture that he had recently cut out of an illustrated
-                  magazine and housed in a nice, gilded frame.
+                  <%= activity.description %>
                 </div>
-                <a href="#" class="btn btn-primary">了解详情</a>
+        
               </div>
             </div>
           </div>
         </div>
+        <% end %>
+        <% end %>
       </div>
 
       <div class="card">
@@ -87,14 +90,15 @@
           <h5>TA参加过的活动</h5>
         </div>
 
-        <% @user.attends.all.each do |attend|%> <% activity =
-        Activity.find(attend.activity_id) %>
+        <% @user.attends.all.each do |attend|%> 
+        <% Activity.where('id = ? and ? > start_time', attend.activity_id, DateTime.now).each do |activity| %>
+
         <div class="list-group card-list-group">
           <div class="list-group-item py-5">
             <div class="media">
               <div class="media-body">
                 <div class="media-heading">
-                  <small class="float-right text-muted">12 min</small>
+                  <small class="float-right text-muted"><%=((activity.start_time - DateTime.now) / 1.day).ceil %> 天后</small>
                   <h5><%= link_to activity.name, activity %></h5>
                 </div>
                 <div class="text-muted text-small">
@@ -105,6 +109,7 @@
             </div>
           </div>
         </div>
+        <% end %>
         <% end %>
       </div>
 
