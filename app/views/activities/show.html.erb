@@ -40,8 +40,8 @@
       <%= button_to('我发起的', attends_path(activity_id: @activity), :class =>
           "btn btn-primary btn-pill align-self-center disabled", :style => "color:white;")%>
     <% elsif Attend.find_by(activity_id: @activity.id, user_id: @current_user.id) != nil %>
-      <%= button_to('取消参加', attend_path(activity_id: @activity.id, user_id: @current_user.id), :method => "delete", :class =>
-                "btn btn-primary btn-pill align-self-center", :style => "color:white;")%>
+      <%= button_to('已参加', attend_path(activity_id: @activity.id, user_id: @current_user.id), :method => "delete", :class =>
+                "btn btn-primary btn-pill align-self-center disabled", :style => "color:white;")%>
     <% else%>
       <%= button_to('我要参加', attends_path(activity_id: @activity), :class =>
           "btn btn-primary btn-pill align-self-center", :style => "color:white;")%>
