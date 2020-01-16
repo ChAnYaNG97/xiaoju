@@ -61,7 +61,7 @@
         :height => "56", :style => "border-radius: 56px;")%>
         <div class="media-body" style="margin-left:10px;">
           <h5>发起人</h5>
-          User.find(@activity.host).name
+          <%User.find(@activity.host).name%>
         </div>
       </div>
     </div>
