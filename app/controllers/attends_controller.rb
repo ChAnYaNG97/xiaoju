@@ -32,7 +32,7 @@ class AttendsController < ApplicationController
     
     respond_to do |format|
       if @attend.save
-        format.html { redirect_to @attend, notice: 'Attend was successfully created.' }
+        format.html { redirect_to activity_path(activity), notice: 'Attend was successfully created.' }
         format.json { render :show, status: :created, location: @attend }
       else
         format.html { render :new }
