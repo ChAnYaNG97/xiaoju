@@ -39,9 +39,9 @@
     <% if @current_user.id == @activity.host %>
       <%= button_to('我发起的', attends_path(activity_id: @activity), :class =>
           "btn btn-primary btn-pill align-self-center disabled", :style => "color:white;")%>
-    <% elsif Attend.find(activity_id: @activity.id, user_id: @current_user.id) != nil %>
-      <%= button_to('取消参加', attends_path(activity_id: @activity.id, user_id: @current_user.id), :method => "delete", :class =>
-                "btn btn-primary btn-pill align-self-center", :style => "color:white;")%>
+    <% elsif Attend.find_by(activity_id: @activity.id, user_id: @current_user.id) != nil %>
+      <%= button_to('已参加', attend_path(activity_id: @activity.id, user_id: @current_user.id), :method => "delete", :class =>
+                "btn btn-primary btn-pill align-self-center disabled", :style => "color:white;")%>
     <% else%>
       <%= button_to('我要参加', attends_path(activity_id: @activity), :class =>
           "btn btn-primary btn-pill align-self-center", :style => "color:white;")%>
@@ -57,11 +57,11 @@
       <h4><%= @activity.start_time.strftime("%A, %B %d, %Y")%></h4>
       <h1><%= @activity.name %></h1>
       <div class="flex media" style="margin-top:20px;">
-        <%= image_tag("mayi.jpg", :alt => "Example Navbar 1", :class => "mr-2",
+        <%= image_tag(User.find(@activity.host).photo_url, :alt => "Example Navbar 1", :class => "mr-2",
         :height => "56", :style => "border-radius: 56px;")%>
         <div class="media-body" style="margin-left:10px;">
           <h5>发起人</h5>
-          yangchen
+          <%=User.find(@activity.host).name%>
         </div>
       </div>
     </div>
